@@ -19,7 +19,7 @@ When /^I move from (\d+),(\d+) with radius (\d+)$/ do |x, y, radius|
 end
 
 Then /^square (\d+),(\d+) should be marked$/ do |x, y|
- 	@map.square_marked?(x.to_i,y.to_i).should == true
+  @map.square_marked?(x.to_i,y.to_i).should == true
 end
 
 Then /^no other squares should be marked$/ do
@@ -27,7 +27,7 @@ Then /^no other squares should be marked$/ do
 end
 
 Then /^(\d+) square(.*) should be marked$/ do |count,multiplesquares|
-	@map.squares_marked.should  == count.to_i
+  @map.squares_marked.should  == count.to_i
 end
 
 Given /^it has a hazard at (\d+),(\d+)$/ do |arg1, arg2|
@@ -35,5 +35,5 @@ Given /^it has a hazard at (\d+),(\d+)$/ do |arg1, arg2|
 end
 
 Then /^all squares should be marked$/ do
- 	@map.squares_marked.should == 10000
+  @map.squares_marked.should == 10000
 end
