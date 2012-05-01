@@ -30,3 +30,10 @@ Then /^(\d+) square(.*) should be marked$/ do |count,multiplesquares|
 	@map.squares_marked.should  == count.to_i
 end
 
+Given /^it has a hazard at (\d+),(\d+)$/ do |arg1, arg2|
+ @map.add_hazard(arg1.to_i, arg2.to_i)
+end
+
+Then /^all squares should be marked$/ do
+ 	@map.squares_marked.should == 10000
+end
