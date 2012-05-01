@@ -1,6 +1,5 @@
 class Mapkata
-	attr_accessor :x, :y
-
+	attr_accessor :x, :y, :points
 	
 	def initialize()
       @points = {}
@@ -10,64 +9,31 @@ class Mapkata
 	def move_from(x,y,radius)
 
 		next_points = {}
-		current_points = {[x,y]=>true}
+		current_points = {[x,y]=>true} #square we input is certainly marked
 
-		radius+=1
+		radius+=1 #first square doesnt really count so have to add one to our loop count
 
-		radius.times do
-			current_points.each_key do |origin|
-				x = origin[0]
-				y = origin[1]
-				if (x < 0) || (x >= @x) || (y < 0) || (y >= @y)
+		radius.times do #make sure we do it at least radius times .. if radius is too high last loops will be quick
+			current_points.each_key do |point|
+				x = point[0]
+				y = point[1]
+				#disallow anything outside the map bounds, hazards, and don't repeat any points
+				if @points[[x,y]] || (x < 0) || (x >= @x) || (y < 0) || (y >= @y) || @hazards[[x,y]]
 					next
 				end
 
-				if @hazards[[x,y]]
-					next
-				end
-
-				if @points[[x,y]]
-					next
-				end
-
+				#mark the current square
 				@points[[x,y]] = true
 
+				#mark all adjacent squares for next time
 				next_points[[x-1,y]] = true
 				next_points[[x+1,y]] = true
 				next_points[[x,y+1]] = true
 				next_points[[x,y-1]] = true
-
 			end
-			current_points = next_points
+			current_points = next_points #next loops will go over the currently adjacent squares
 			next_points = {}
 		end
-		return
-
-		if (x < 0) || (x >= @x) || (y < 0) || (y >= @y)
-			return false
-		end
-
-		if square_hazard?(x,y)
-			return false
-		end	
-
-		if @points[[x,y]] && @points[[x,y]] >= radius
-		 	return false
-		 end
-	
-		@points[[x,y]] = radius
-
-		if radius > 0
-			move_from(x-1,y,radius-1)
-			move_from(x+1,y,radius-1)
-			move_from(x,y-1,radius-1)
-			move_from(x,y+1,radius-1)
-		end
-
-	end
-
-	def square_hazard?(x,y)
-		@hazards[[x,y]]?true:false
 	end
 
 	def square_marked?(x,y)
@@ -75,10 +41,8 @@ class Mapkata
 	end
 
 	def squares_marked
-		#puts @points.inspect
 		@points.length
 	end
-
 
 	def add_hazard(x,y)
 		@hazards[[x,y]] = true

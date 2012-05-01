@@ -1,0 +1,3 @@
+Map kata using cucumber and an iterative approach.
+
+The recursive approach took longer than 1 min @ 100x100 size whereas the iterative approach solves 100x100 in sub-second.
