@@ -59,7 +59,13 @@ Scenario: Hazard Test
 	And square 4,1 should be marked
 	
 
-# Scenario: Large Test
-# 	Given I have a 100x100 map
-# 	When I move from 0,0 with radius 9003
-# 	Then all squares should be marked
+Scenario: Large Test
+	Given I have a 10x10 map
+	When I move from 0,0 with radius 9003
+	Then 100 squares should be marked
+
+
+Scenario: Large Test
+	Given I have a 10x100 map
+	When I move from 0,0 with radius 9003
+	Then 1000 squares should be marked

@@ -9,21 +9,19 @@ class Mapkata
 
 	def move_from(x,y,radius)
 
-		if @points.key? [x,y]
-		 	return false
-		 end
-	
 		if (x < 0) || (x >= @x) || (y < 0) || (y >= @y)
-			
 			return false
 		end
 
 		if square_hazard?(x,y)
-
 			return false
 		end	
 
-		@points[[x,y]] = true
+		if @points[[x,y]] && @points[[x,y]] >= radius
+		 	return false
+		 end
+	
+		@points[[x,y]] = radius
 
 		if radius > 0
 			move_from(x-1,y,radius-1)
