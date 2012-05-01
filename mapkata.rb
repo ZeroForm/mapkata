@@ -1,8 +1,8 @@
 class Mapkata
-  attr_accessor :x, :y, :points
+  attr_accessor :x, :y, :marked_squares
   
   def initialize()
-      @points = {}
+      @marked_squares = {}
       @hazards = {}
     end
 
@@ -18,12 +18,12 @@ class Mapkata
         x = point[0]
         y = point[1]
         #disallow anything outside the map bounds, hazards, and don't repeat any points
-        if @points[[x,y]] || (x < 0) || (x >= @x) || (y < 0) || (y >= @y) || @hazards[[x,y]]
+        if @marked_squares[[x,y]] || (x < 0) || (x >= @x) || (y < 0) || (y >= @y) || @hazards[[x,y]]
           next
         end
 
         #mark the current square
-        @points[[x,y]] = true
+        @marked_squares[[x,y]] = true
 
         #mark all adjacent squares for next time
         next_points[[x-1,y]] = true
@@ -37,11 +37,11 @@ class Mapkata
   end
 
   def square_marked?(x,y)
-    @points[[x,y]]?true:false
+    @marked_squares[[x,y]]
   end
 
   def squares_marked
-    @points.length
+    @marked_squares.length
   end
 
   def add_hazard(x,y)

@@ -8,7 +8,7 @@ Given /^I have a (\d+)x(\d+) map$/ do |x, y|
   @map.y = y.to_i
 end
 
-Given /^I have a map$/ do ||
+Given /^I have a map$/ do
   @map = Mapkata.new
   @map.x = 1
   @map.y = 1
@@ -22,18 +22,10 @@ Then /^square (\d+),(\d+) should be marked$/ do |x, y|
   @map.square_marked?(x.to_i,y.to_i).should == true
 end
 
-Then /^no other squares should be marked$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
 Then /^(\d+) square(.*) should be marked$/ do |count,multiplesquares|
   @map.squares_marked.should  == count.to_i
 end
 
-Given /^it has a hazard at (\d+),(\d+)$/ do |arg1, arg2|
- @map.add_hazard(arg1.to_i, arg2.to_i)
-end
-
-Then /^all squares should be marked$/ do
-  @map.squares_marked.should == 10000
+Given /^it has a hazard at (\d+),(\d+)$/ do |x, y|
+ @map.add_hazard(x.to_i, y.to_i)
 end

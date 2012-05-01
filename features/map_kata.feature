@@ -64,13 +64,13 @@ Scenario: Large Test
   When I move from 0,0 with radius 9003
   Then 100 squares should be marked
 
+  Scenario: Super Large Test
+  Given I have a 100x100 map
+  When I move from 0,0 with radius 1000
+  Then 10000 squares should be marked
 
-Scenario: Large Test
-  Given I have a 10x100 map
-  When I move from 0,0 with radius 9003
-  Then 1000 squares should be marked
-
-Scenario: Super Large Test
-Given I have a 100x100 map
-When I move from 0,0 with radius 1000
-Then 10000 squares should be marked
+Scenario: Super Large Test w/ hazard
+  Given I have a 100x100 map
+  And it has a hazard at 0,1
+  When I move from 0,0 with radius 1000
+  Then 9999 squares should be marked
