@@ -11,9 +11,7 @@ class Mapkata
     next_points = {}
     current_points = {[x,y]=>true} #square we input is certainly marked
 
-    radius+=1 #first square doesnt really count so have to add one to our loop count
-
-    radius.times do #make sure we do it at least radius times .. if radius is too high last loops will be quick
+    (radius+1).times do #make sure we do it at least radius times .. if radius is too high last loops will be quick
       current_points.each_key do |point|
         x = point[0]
         y = point[1]

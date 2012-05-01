@@ -1,5 +1,7 @@
-require "mapkata"
+
 begin require 'rspec/expectations'; rescue LoadError; require 'spec/expectations'; end 
+$:.unshift(File.dirname(__FILE__) + '/../../')
+require "mapkata"
 
 
 Given /^I have a (\d+)x(\d+) map$/ do |x, y|

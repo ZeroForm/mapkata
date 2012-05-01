@@ -74,3 +74,8 @@ Scenario: Super Large Test w/ hazard
   And it has a hazard at 0,1
   When I move from 0,0 with radius 1000
   Then 9999 squares should be marked
+
+  Scenario: Super Large Test w/ hazard
+  Given I have a 1000x1000 map
+  When I move from 0,0 with radius 10000
+  Then 1000000 squares should be marked
