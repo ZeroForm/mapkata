@@ -9,6 +9,40 @@ class Mapkata
 
 	def move_from(x,y,radius)
 
+		next_points = {}
+		current_points = {[x,y]=>true}
+
+		radius+=1
+
+		radius.times do
+			current_points.each_key do |origin|
+				x = origin[0]
+				y = origin[1]
+				if (x < 0) || (x >= @x) || (y < 0) || (y >= @y)
+					next
+				end
+
+				if @hazards[[x,y]]
+					next
+				end
+
+				if @points[[x,y]]
+					next
+				end
+
+				@points[[x,y]] = true
+
+				next_points[[x-1,y]] = true
+				next_points[[x+1,y]] = true
+				next_points[[x,y+1]] = true
+				next_points[[x,y-1]] = true
+
+			end
+			current_points = next_points
+			next_points = {}
+		end
+		return
+
 		if (x < 0) || (x >= @x) || (y < 0) || (y >= @y)
 			return false
 		end
